@@ -9,6 +9,7 @@
 # Step 2: Create 2 Virtual Machines 
   Setup two EC2 instances in us-east-1 and us-east-2
 - Amazon Linux 2
+- AMI
 - instance type
 - Security group
 - key pair
@@ -39,7 +40,7 @@ which will build the docker images and start the application.
  I will provision an external volume like an EBS volume
  and then map or mount it to the containers volume for data persistency because containers are ephemeral.
 
-# Step 6: For High Availability, Secure connection and Domain name service.
+# Step 6: For High Availability, Secure connection and DNS Resolution.
 I will configure the Two Virtual Machine as the Target group and then setup the Application Load balancer to distribute traffic between the Target groups.
 I will also configure the ALB with the SSL/TLS certificate for a secure access to the application Using HTTPS.
 I will create an DNS A record and map the ALB endpoint to the A record for the DNS service to resolve the ALB endpoint to a custom Domain name.
@@ -47,17 +48,20 @@ I will create an DNS A record and map the ALB endpoint to the A record for the D
 # Step 7: For Security,
 I will make sure to enable encryption at rest as well as in Transit using KMS and SSL/TLS
 I will enable backup of data by taking automatic snapshot with AWS Data Lifecycle manager.
-for IAM user and roles, i will leverage the principle of least privilege that means i will only give fine grain access to services and users that need access to the application.
+for IAM users and roles, i will leverage the principle of least privilege that means i will only give fine grain access to services and users that need access to the application.
 
 # Step 8: Post Deployment,
 i will setup Cloudwatch which will give me insight base on health and performance of my application by monitoring and collecting logs.
+i will develop a custom CloudWatch Alarms for proactive monitoring.
 I can also set up SNS for notification.
 
 
 
-# For CICD Implementation Using Jenkins
+# For CICD Implementation Using Jenkins 
 I will utilize Jenkins, a powerful automation service that enables you to orchestrate all stages in your pipeline, 
 from continuous integration all the way to continuous deployment.
+
+#### NOTE, i will use the Terraform Templete that i mention in the infrastructure setup
 
 # Step 1
 i will create a new Virtual Machine and ssh into the machine
@@ -72,6 +76,7 @@ i will install:
 I will create 2 jenkins pipeline, one to automate infrastructure provisioning and the second for automatic build and deployment of the docker images.
 to configure the jenkins, i will login to the service using the public ip of my virtual machine and the default jenkins port number which is 8080.
 i will setup the necessary plugin inside my dashboard. then i will create a pipeline job.
+I will also use Jenkins shared libraries to manage my pipeline code.
 
 # First Pipeline Script
 stage 1: i will checkout the code
@@ -88,5 +93,8 @@ stage 1: i will checkout the code
 stage 2: i will use ssh to copy the Docker-compose into the both EC2 instances.
 stage 3: i will create an external volume and then mount it to each container inside each Vms
 stage 3: i will run Docker-compose up -d.
+astly i will enable cloudwatch for monitoring and logging.
+
+
 
 
