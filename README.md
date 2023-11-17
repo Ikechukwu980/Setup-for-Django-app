@@ -18,7 +18,7 @@
 - Target Group
 - TLS/SSL certificate
 - DNS
-
+##### For Infrastructure Provisioning and Management
 I will provision all of this Infrastructure levegring Terraform and i will make sure to utilize Terraform feature call Modules.
 Step 1 will be in a separate module as well as step 2 and 3.
 
@@ -39,9 +39,10 @@ which will build the docker images and start the applicaition.
  I will provision an external volume like an EBS volume
  and then map or mount it to the containers volume for data persistency because containers are ephemeral.
 
-# Step 6: For High Availability,
-I will configure the Two Virtual Subnets as the Target group and then setup the Application Load balancer to distribute traffic between the Target groups.
+# Step 6: For High Availability, Secure connection and Domain name service.
+I will configure the Two Virtual Machine as the Target group and then setup the Application Load balancer to distribute traffic between the Target groups.
 I will also configurte the ALB with the SSL/TLS certifiacte for a secure access to the application Using HTTPS.
+I will create an DNS A record and map the ALB endpoint to the A record for the DNS service to resolve the ALB endpoint to a custom Domain name.
 
 # Step 7: For Security,
 I will make sure to enable encription at rest as well as in Transit using KMS and SSL/TLS
@@ -50,6 +51,42 @@ for IAM user and roles, i will levegrage the principle of least privilege that m
 
 # Step 8: Post Deployment,
 i will setup Cloudwatch which will give me insight base on health and performance of my application by monitoring and collecting logs.
-I can also set up SNS for notification
+I can also set up SNS for notification.
+
+
+
+# For CICD Implemetation Using Jenkins
+I will utilize Jenkins, a powerful automation service that enables you to orchestrate all stages in your pipeline, 
+from continuous integration all the way to continuous deployment.
+
+# Step 1
+i will create a new Virtual Machine and ssh into the machine
+i will install:
+- Jenkins,
+- Git,
+- Docker,
+- Docker-compose,
+- AWS CLI,
+- Terraform
+
+I will create 2 jenkins pipeline, one to automate infrastructure provisioning and the second for automatic build and deploymentof the docker images.
+to configure the jenkins, i will login to the service using the public ip of my virtual machine  and the default jenkins port number which is 8080.
+i will setup the neccesary plugin inside my dashbord. then i will create a pipeline job.
+
+# First Pipeline Script
+stage 1: i will checkout the code
+stage 2: I will comfirm the terraform version (Terraform --version)
+stage 3: i intialize the repository (Terraform init)
+stage 4: i will check for syntax error (Terraform fmt)
+stage 5: i will do a dry run (Terraform plan)
+stage 5: i will create the infrastructure (Terraform apply --auto-approve)
+lastly i can integrate slack to nitfy me if there is an error.
+
+# Second Pipeline Script
+I will configure each stages with multiple commands because I'm deploying into two VMs
+stage 1: i will checkout the code
+stage 2: i will use ssh to copy the Docker-compose into the both EC2 instances.
+stage 3: i will create an external volume and then mount it to each containers inside each Vms
+stage 3: i will run Docker-compose up -d.
 
 
