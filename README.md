@@ -93,7 +93,7 @@ stage 1: i will checkout the code
 stage 2: i will use ssh to copy the Docker-compose into the both EC2 instances.
 stage 3: i will create an external volume and then mount it to each container inside each Vms
 stage 3: i will run Docker-compose up -d.
-astly i will enable cloudwatch for monitoring and logging.
+lastly i will enable cloudwatch for monitoring and logging.
 
 
 
