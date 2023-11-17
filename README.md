@@ -2,7 +2,7 @@
   setup the networking components
   i will provision:
 - 1 VPC
-- 2 Public Subnets (us-east-1 and us-east-2)
+- 3 Public Subnets (us-east-1 and us-east-2)
 - Route tables
 - internet gateway
 - Security Groups open to ports (8000, 22, 443, 80, 8025 and 5432)
