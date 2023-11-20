@@ -49,6 +49,7 @@ Step 1 will be in a separate module as well as step 2 and 3.
 - I will make sure to enable encryption at rest as well as in Transit using KMS and SSL/TLS
 - I will enable backup of data by taking automatic snapshot with AWS Data Lifecycle manager.
 - for IAM users and roles, i will leverage the principle of least privilege that means i will only give fine grain access to services and users that need access to the application.
+- I will setup AWS WAF to contorl network traffic which from application from cyber attacks like sql injection, cross site scripting DDOs attacks.
 
 # Step 8: Post Deployment,
 - i will setup Cloudwatch which will give me insight base on health and performance of my application by monitoring and collecting logs.
