@@ -14,6 +14,7 @@
  - Provision a RDS postgres database in AWS RDS service which is a manage service that is highly available out of the box.
  - Configure a multi AZ deployment for high availability and fault tolerant.
  - Ensure to update the database environmental variables in the .env.example file.
+ - I will use a private subnet to deploy the database
  - Attach the RDS PostgreSQL Security group to the database which only allow traffic from the ECS task security group.
  - Ensure to store the database credential in SSM parameter store.
 # Create an ECR Repo, Build the Docker images and push it to ECR
